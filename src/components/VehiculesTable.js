@@ -2,8 +2,8 @@ import React from 'react';
 
 const VehiculesTable = ({vehicules}) =>
     (
-        <table>
-            <thead>
+        <table className="table table-striped">
+            <thead className="thead-dark">
                 <tr>
                     <th>Marque</th>
                     <th>Modele</th>
