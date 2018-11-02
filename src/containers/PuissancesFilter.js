@@ -2,6 +2,7 @@ import {connect} from "react-redux";
 import {uniqueSortedItems} from "../Utils";
 import FilterSelect from "../components/FilterSelect";
 
+const INDEX = 5;
 
 const mapStateToProps = state => {
     return {
@@ -9,7 +10,8 @@ const mapStateToProps = state => {
         label: "Puissance",
         allLabel: "Toutes les puissances",
         values: collectPuissances(state.vehiculier.vehicules),
-        selectedValue: state.vehiculier.selectedPuissance
+        selectedValue: state.vehiculier.selectedPuissance,
+        enabled: INDEX <= state.vehiculier.selectedIndex + 1
     };
 };
 
@@ -17,6 +19,7 @@ const mapDispatchToProps = dispatch => {
     return {
         updateValue: puissance => dispatch({
             type: "SELECT_PUISSANCE",
+            index: INDEX,
             puissance: puissance
         })
     }

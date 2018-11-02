@@ -2,6 +2,7 @@ import {connect} from "react-redux";
 import {uniqueSortedItems} from "../Utils";
 import FilterSelect from "../components/FilterSelect";
 
+const INDEX = 4;
 
 const mapStateToProps = state => {
     return {
@@ -9,7 +10,8 @@ const mapStateToProps = state => {
         label: "Carrosserie",
         allLabel: "Toutes les carrosseries",
         values: collectCarrosseries(state.vehiculier.vehicules),
-        selectedValue: state.vehiculier.selectedCarrosserie
+        selectedValue: state.vehiculier.selectedCarrosserie,
+        enabled: INDEX <= state.vehiculier.selectedIndex + 1
     };
 };
 
@@ -17,6 +19,7 @@ const mapDispatchToProps = dispatch => {
     return {
         updateValue: carrosserie => dispatch({
             type: "SELECT_CARROSSERIE",
+            index: INDEX,
             carrosserie: carrosserie
         })
     }
