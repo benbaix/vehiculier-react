@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {collectOptions} from "../Utils";
+import {collectOptions, SELECT_OPTION} from "../Utils";
 import FilterSelect from "../components/FilterSelect";
 
 const INDEX = 3;
@@ -23,7 +23,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         updateValue: value => dispatch({
-            type: "SELECT_CARBURANT",
+            type: SELECT_OPTION,
             index: INDEX,
             value: value
         })

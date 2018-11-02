@@ -1,5 +1,7 @@
 export const ALL = "all";
 
+export const SELECT_OPTION = "SELECT_OPTION";
+
 export const collectOptions = (vehicules, selections, index, collector) =>
     [...new Set(
         vehicules
