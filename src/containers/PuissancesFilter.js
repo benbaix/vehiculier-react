@@ -17,7 +17,7 @@ const mapStateToProps = state => {
             state.vehiculier.selectedCarburant,
             state.vehiculier.selectedCarrosserie,
             ALL,
-            vehicule => vehicule.puissance,
+            vehicule => String(vehicule.puissance),
         ),
         selectedValue: state.vehiculier.selectedPuissance,
         enabled: INDEX <= state.vehiculier.selectedIndex + 1

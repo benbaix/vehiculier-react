@@ -64,7 +64,7 @@ const vehiculier = (state = initialState, action) => {
             return {
                 ...state,
                 selectedIndex: getSelectedIndex(action.value, action.index),
-                selectedPuissance: action.value === ALL ? ALL : parseInt(action.value),
+                selectedPuissance: action.value,
             };
         default:
             return state;
