@@ -5,6 +5,8 @@ import FilterSelect from "../components/FilterSelect";
 
 const mapStateToProps = state => {
     return {
+        id: "carrosseries",
+        label: "Carrosserie",
         allLabel: "Toutes les carrosseries",
         values: collectCarrosseries(state.vehiculier.vehicules),
         selectedValue: state.vehiculier.selectedCarrosserie
