@@ -1,27 +1,20 @@
 import {connect} from "react-redux";
 import {collectOptions, SELECT_OPTION} from "../Utils";
+import {getAllLabel, getCollector, getId, getLabel} from "../models/FiltersDefinition";
 import FilterSelect from "../components/FilterSelect";
 
 const INDEX = 5;
 
-const getId = () => "puissances";
-
-const getLabel = () => "Puissance";
-
-const getAllLabel = () => "Toutes les puissances";
-
-const getCollector = () => vehicule => String(vehicule.puissance);
-
 const mapStateToProps = state => {
     return {
-        id: getId(),
-        label: getLabel(),
-        allLabel: getAllLabel(),
+        id: getId(INDEX),
+        label: getLabel(INDEX),
+        allLabel: getAllLabel(INDEX),
         values: collectOptions(
             state.vehiculier.vehicules,
             state.vehiculier.selections,
             INDEX,
-            getCollector(),
+            getCollector(INDEX),
         ),
         selectedValue: state.vehiculier.selections[INDEX],
         enabled: INDEX <= state.vehiculier.selectedIndex + 1
