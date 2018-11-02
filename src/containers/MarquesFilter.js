@@ -4,16 +4,24 @@ import FilterSelect from "../components/FilterSelect";
 
 const INDEX = 0;
 
+const getId = () => "marques";
+
+const getLabel = () => "Marque";
+
+const getAllLabel = () => "Toutes les marques";
+
+const getCollector = () => vehicule => vehicule.marqueLibelle;
+
 const mapStateToProps = state => {
     return {
-        id: "marques",
-        label: "Marque",
-        allLabel: "Toutes les marques",
+        id: getId(),
+        label: getLabel(),
+        allLabel: getAllLabel(),
         values: collectOptions(
             state.vehiculier.vehicules,
             state.vehiculier.selections,
             INDEX,
-            vehicule => vehicule.marqueLibelle,
+            getCollector(),
         ),
         selectedValue: state.vehiculier.selections[INDEX],
         enabled: INDEX <= state.vehiculier.selectedIndex + 1
