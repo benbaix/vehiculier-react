@@ -1,15 +1,13 @@
 export const ALL = "all";
 
-export const filterVehicules = (vehicules, marque, modele, boite, carburant, carrosserie, puissance) => vehicules
-    .filter(vehicule => marque === ALL || vehicule.marqueLibelle === marque)
-    .filter(vehicule => modele === ALL || vehicule.modeleLibelle === modele)
-    .filter(vehicule => boite === ALL || vehicule.boiteVitesses === boite)
-    .filter(vehicule => carburant === ALL || vehicule.energieLibelle === carburant)
-    .filter(vehicule => carrosserie === ALL || vehicule.carrosserieLibelle === carrosserie)
-    .filter(vehicule => puissance === ALL || String(vehicule.puissance) === puissance);
-
-export const collectOptions = (vehicules, marque, modele, boite, carburant, carrosserie, puissance, collector) =>
+export const collectOptions = (vehicules, selections, index, collector) =>
     [...new Set(
-        filterVehicules(vehicules, marque, modele, boite, carburant, carrosserie, puissance)
+        vehicules
+            .filter(vehicule => index <= 0 || vehicule.marqueLibelle === selections[0])
+            .filter(vehicule => index <= 1 || vehicule.modeleLibelle === selections[1])
+            .filter(vehicule => index <= 2 || vehicule.boiteVitesses === selections[2])
+            .filter(vehicule => index <= 3 || vehicule.energieLibelle === selections[3])
+            .filter(vehicule => index <= 4 || vehicule.carrosserieLibelle === selections[4])
+            .filter(vehicule => index <= 5 || String(vehicule.puissance) === selections[5])
             .map(vehicule => collector(vehicule))
     )].sort();

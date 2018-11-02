@@ -1,70 +1,57 @@
 import VEHICULES from "../mock/vehicules";
 import {ALL} from "../Utils";
 
+const NB_FILTERS = 6;
+
 const initialState = {
     vehicules: VEHICULES,
     selectedIndex: -1,
-    selectedMarque: ALL,
-    selectedModele: ALL,
-    selectedBoite: ALL,
-    selectedCarburant: ALL,
-    selectedCarrosserie: ALL,
-    selectedPuissance: ALL,
+    selections: Array(NB_FILTERS).fill(ALL),
 };
 
 const vehiculier = (state = initialState, action) => {
-    console.log(action.index);
     switch (action.type) {
         case "SELECT_MARQUE":
+            state.selections[action.index] = action.value;
+            state.selections.fill(ALL, action.index + 1, NB_FILTERS);
             return {
                 ...state,
                 selectedIndex: getSelectedIndex(action.value, action.index),
-                selectedMarque: action.value,
-                selectedModele: ALL,
-                selectedBoite: ALL,
-                selectedCarburant: ALL,
-                selectedCarrosserie: ALL,
-                selectedPuissance: ALL,
             };
         case "SELECT_MODELE":
+            state.selections[action.index] = action.value;
+            state.selections.fill(ALL, action.index + 1, NB_FILTERS);
             return {
                 ...state,
                 selectedIndex: getSelectedIndex(action.value, action.index),
-                selectedModele: action.value,
-                selectedBoite: ALL,
-                selectedCarburant: ALL,
-                selectedCarrosserie: ALL,
-                selectedPuissance: ALL,
             };
         case "SELECT_BOITE":
+            state.selections[action.index] = action.value;
+            state.selections.fill(ALL, action.index + 1, NB_FILTERS);
             return {
                 ...state,
                 selectedIndex: getSelectedIndex(action.value, action.index),
-                selectedBoite: action.value,
-                selectedCarburant: ALL,
-                selectedCarrosserie: ALL,
-                selectedPuissance: ALL,
             };
         case "SELECT_CARBURANT":
+            state.selections[action.index] = action.value;
+            state.selections.fill(ALL, action.index + 1, NB_FILTERS);
             return {
                 ...state,
                 selectedIndex: getSelectedIndex(action.value, action.index),
-                selectedCarburant: action.value,
-                selectedCarrosserie: ALL,
-                selectedPuissance: ALL,
             };
         case "SELECT_CARROSSERIE":
+            state.selections[action.index] = action.value;
+            state.selections.fill(ALL, action.index + 1, NB_FILTERS);
             return {
                 ...state,
                 selectedIndex: getSelectedIndex(action.value, action.index),
-                selectedCarrosserie: action.value,
-                selectedPuissance: ALL,
             };
         case "SELECT_PUISSANCE":
+            state.selections[action.index] = action.value;
+            state.selections.fill(ALL, action.index + 1, NB_FILTERS);
             return {
                 ...state,
                 selectedIndex: getSelectedIndex(action.value, action.index),
-                selectedPuissance: action.value,
             };
         default:
             return state;
