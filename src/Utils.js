@@ -1,10 +1,12 @@
+export const ALL = "all";
+
 export const filterVehicules = (vehicules, marque, modele, boite, carburant, carrosserie, puissance) => vehicules
-    .filter(vehicule => marque === "all" || vehicule.marqueLibelle === marque)
-    .filter(vehicule => modele === "all" || vehicule.modeleLibelle === modele)
-    .filter(vehicule => boite === "all" || vehicule.boiteVitesses === boite)
-    .filter(vehicule => carburant === "all" || vehicule.energieLibelle === carburant)
-    .filter(vehicule => carrosserie === "all" || vehicule.carrosserieLibelle === carrosserie)
-    .filter(vehicule => puissance === "all" || vehicule.puissance === puissance);
+    .filter(vehicule => marque === ALL || vehicule.marqueLibelle === marque)
+    .filter(vehicule => modele === ALL || vehicule.modeleLibelle === modele)
+    .filter(vehicule => boite === ALL || vehicule.boiteVitesses === boite)
+    .filter(vehicule => carburant === ALL || vehicule.energieLibelle === carburant)
+    .filter(vehicule => carrosserie === ALL || vehicule.carrosserieLibelle === carrosserie)
+    .filter(vehicule => puissance === ALL || vehicule.puissance === puissance);
 
 export const collectOptions = (vehicules, marque, modele, boite, carburant, carrosserie, puissance, collector) =>
     [...new Set(

@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {collectOptions} from "../Utils";
+import {ALL, collectOptions} from "../Utils";
 import FilterSelect from "../components/FilterSelect";
 
 const INDEX = 0;
@@ -11,12 +11,12 @@ const mapStateToProps = state => {
         allLabel: "Toutes les marques",
         values: collectOptions(
             state.vehiculier.vehicules,
-            "all",
-            "all",
-            "all",
-            "all",
-            "all",
-            "all",
+            ALL,
+            ALL,
+            ALL,
+            ALL,
+            ALL,
+            ALL,
             vehicule => vehicule.marqueLibelle,
         ),
         selectedValue: state.vehiculier.selectedMarque,

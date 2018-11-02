@@ -1,14 +1,15 @@
 import VEHICULES from "../mock/vehicules";
+import {ALL} from "../Utils";
 
 const initialState = {
     vehicules: VEHICULES,
     selectedIndex: -1,
-    selectedMarque: "all",
-    selectedModele: "all",
-    selectedBoite: "all",
-    selectedCarburant: "all",
-    selectedCarrosserie: "all",
-    selectedPuissance: "all",
+    selectedMarque: ALL,
+    selectedModele: ALL,
+    selectedBoite: ALL,
+    selectedCarburant: ALL,
+    selectedCarrosserie: ALL,
+    selectedPuissance: ALL,
 };
 
 const vehiculier = (state = initialState, action) => {
@@ -19,57 +20,57 @@ const vehiculier = (state = initialState, action) => {
                 ...state,
                 selectedIndex: getSelectedIndex(action.marque, action.index),
                 selectedMarque: action.marque,
-                selectedModele: "all",
-                selectedBoite: "all",
-                selectedCarburant: "all",
-                selectedCarrosserie: "all",
-                selectedPuissance: "all",
+                selectedModele: ALL,
+                selectedBoite: ALL,
+                selectedCarburant: ALL,
+                selectedCarrosserie: ALL,
+                selectedPuissance: ALL,
             };
         case "SELECT_MODELE":
             return {
                 ...state,
                 selectedIndex: getSelectedIndex(action.modele, action.index),
                 selectedModele: action.modele,
-                selectedBoite: "all",
-                selectedCarburant: "all",
-                selectedCarrosserie: "all",
-                selectedPuissance: "all",
+                selectedBoite: ALL,
+                selectedCarburant: ALL,
+                selectedCarrosserie: ALL,
+                selectedPuissance: ALL,
             };
         case "SELECT_BOITE":
             return {
                 ...state,
                 selectedIndex: getSelectedIndex(action.boite, action.index),
                 selectedBoite: action.boite,
-                selectedCarburant: "all",
-                selectedCarrosserie: "all",
-                selectedPuissance: "all",
+                selectedCarburant: ALL,
+                selectedCarrosserie: ALL,
+                selectedPuissance: ALL,
             };
         case "SELECT_CARBURANT":
             return {
                 ...state,
                 selectedIndex: getSelectedIndex(action.carburant, action.index),
                 selectedCarburant: action.carburant,
-                selectedCarrosserie: "all",
-                selectedPuissance: "all",
+                selectedCarrosserie: ALL,
+                selectedPuissance: ALL,
             };
         case "SELECT_CARROSSERIE":
             return {
                 ...state,
                 selectedIndex: getSelectedIndex(action.carrosserie, action.index),
                 selectedCarrosserie: action.carrosserie,
-                selectedPuissance: "all",
+                selectedPuissance: ALL,
             };
         case "SELECT_PUISSANCE":
             return {
                 ...state,
                 selectedIndex: getSelectedIndex(action.puissance, action.index),
-                selectedPuissance: action.puissance === "all" ? "all" : parseInt(action.puissance),
+                selectedPuissance: action.puissance === ALL ? ALL : parseInt(action.puissance),
             };
         default:
             return state;
     }
 };
 
-const getSelectedIndex = (option, index) => option === "all" ? index - 1 : index;
+const getSelectedIndex = (option, index) => option === ALL ? index - 1 : index;
 
 export default vehiculier;

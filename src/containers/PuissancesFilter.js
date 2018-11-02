@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {collectOptions} from "../Utils";
+import {ALL, collectOptions} from "../Utils";
 import FilterSelect from "../components/FilterSelect";
 
 const INDEX = 5;
@@ -16,7 +16,7 @@ const mapStateToProps = state => {
             state.vehiculier.selectedBoite,
             state.vehiculier.selectedCarburant,
             state.vehiculier.selectedCarrosserie,
-            "all",
+            ALL,
             vehicule => vehicule.puissance,
         ),
         selectedValue: state.vehiculier.selectedPuissance,
