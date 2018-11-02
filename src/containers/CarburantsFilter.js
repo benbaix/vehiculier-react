@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {uniqueSortedItems} from "../Utils";
+import {collectOptions} from "../Utils";
 import FilterSelect from "../components/FilterSelect";
 
 const INDEX = 3;
@@ -9,7 +9,16 @@ const mapStateToProps = state => {
         id: "carburants",
         label: "Carburant",
         allLabel: "Tous les carburants",
-        values: collectCarburants(state.vehiculier.vehicules),
+        values: collectOptions(
+            state.vehiculier.vehicules,
+            state.vehiculier.selectedMarque,
+            state.vehiculier.selectedModele,
+            state.vehiculier.selectedBoite,
+            "all",
+            "all",
+            "all",
+            vehicule => vehicule.energieLibelle,
+        ),
         selectedValue: state.vehiculier.selectedCarburant,
         enabled: INDEX <= state.vehiculier.selectedIndex + 1
     };
@@ -24,7 +33,5 @@ const mapDispatchToProps = dispatch => {
         })
     }
 };
-
-export const collectCarburants = (vehicules) => uniqueSortedItems(vehicules.map(vehicule => vehicule.energieLibelle));
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterSelect)
