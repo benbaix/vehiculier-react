@@ -26,10 +26,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        updateValue: boite => dispatch({
+        updateValue: value => dispatch({
             type: "SELECT_BOITE",
             index: INDEX,
-            boite: boite
+            value: value
         })
     }
 };

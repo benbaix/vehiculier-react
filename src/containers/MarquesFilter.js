@@ -26,10 +26,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        updateValue: marque => dispatch({
+        updateValue: value => dispatch({
             type: "SELECT_MARQUE",
             index: INDEX,
-            marque: marque
+            value: value
         })
     }
 };

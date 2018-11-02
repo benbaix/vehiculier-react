@@ -26,10 +26,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        updateValue: carburant => dispatch({
+        updateValue: value => dispatch({
             type: "SELECT_CARBURANT",
             index: INDEX,
-            carburant: carburant
+            value: value
         })
     }
 };
