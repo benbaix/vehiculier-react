@@ -11,6 +11,7 @@ const VehiculesTable = ({vehicules}) =>
                     <th>Carburant</th>
                     <th>Carosserie</th>
                     <th>Puissance</th>
+                    <th>Version</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +23,7 @@ const VehiculesTable = ({vehicules}) =>
                         <td>{vehicule.energieLibelle}</td>
                         <td>{vehicule.carrosserieLibelle}</td>
                         <td>{vehicule.puissance}cv</td>
+                        <td>{vehicule.version}</td>
                     </tr>
                 )}
             </tbody>

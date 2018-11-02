@@ -5,7 +5,12 @@ import './mock/vehicules';
 import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
 import vehiculier from "./redux/vehiculier";
-import PuissancesContainer from "./containers/PuissancesContainer";
+import MarquesContainer from "./containers/MarquesFilter";
+import ModelesContainer from "./containers/ModelesFilter";
+import BoitesContainer from "./containers/BoitesFilter";
+import CarburantsContainer from "./containers/CarburantsFilter";
+import CarrosseriesContainer from "./containers/CarrosseriesFilter";
+import PuissancesContainer from "./containers/PuissancesFilter";
 import VehiculesContainer from "./containers/VehiculesContainer";
 
 const store = createStore(
@@ -16,12 +21,24 @@ const store = createStore(
 class App extends Component {
     render() {
         return (
-            <Provider store={store}>
-                <>
-                    <PuissancesContainer/>
-                    <VehiculesContainer/>
-                </>
-            </Provider>
+            <div className="container-fluid">
+                <h1>Vehicules</h1>
+                <Provider store={store}>
+                    <>
+                        <div className="form-group">
+                            <div className="row">
+                                <MarquesContainer/>
+                                <ModelesContainer/>
+                                <BoitesContainer/>
+                                <CarburantsContainer/>
+                                <CarrosseriesContainer/>
+                                <PuissancesContainer/>
+                            </div>
+                        </div>
+                        <VehiculesContainer/>
+                    </>
+                </Provider>
+            </div>
         );
     }
 }
