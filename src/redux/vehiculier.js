@@ -1,18 +1,18 @@
 import VEHICULES from "../mock/vehicules";
-import {ALL, SELECT_OPTION} from "../Utils";
-import {getNbFilters} from "../models/FiltersDefinition";
+import {ALL, SELECT_OPTION} from "../Constants";
+import FILTERS from "../models/FiltersDefinition";
 
 const initialState = {
     vehicules: VEHICULES,
     selectedIndex: -1,
-    selections: Array(getNbFilters()).fill(ALL),
+    selections: Array(FILTERS.length).fill(ALL),
 };
 
 const vehiculier = (state = initialState, action) => {
     switch (action.type) {
         case SELECT_OPTION:
             state.selections[action.index] = action.value;
-            state.selections.fill(ALL, action.index + 1, getNbFilters());
+            state.selections.fill(ALL, action.index + 1, FILTERS.length);
             return {
                 ...state,
                 selectedIndex: action.value === ALL ? action.index - 1 : action.index,

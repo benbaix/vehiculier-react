@@ -5,7 +5,7 @@ import './mock/vehicules';
 import vehiculier from "./redux/vehiculier";
 import FilterSelect from "./components/FilterSelect";
 import VehiculesTable from "./components/VehiculesTable";
-import {getFilters} from "./models/FiltersDefinition";
+import FILTERS from "./models/FiltersDefinition";
 
 const store = createStore(
     combineReducers({vehiculier}),
@@ -21,7 +21,7 @@ class App extends Component {
                     <>
                         <div className="form-group">
                             <div className="row">
-                                {getFilters().map((filter, index) => <FilterSelect key={index} index={index}/>)}
+                                {FILTERS.map((filter, index) => <FilterSelect key={index} index={index}/>)}
                             </div>
                         </div>
                         <VehiculesTable/>

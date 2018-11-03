@@ -43,16 +43,4 @@ const FILTERS = [
     },
 ];
 
-const getFilters = () => FILTERS;
-
-const getNbFilters = () => FILTERS.length;
-
-const getId = (index) => FILTERS[index].id;
-
-const getLabel = (index) => FILTERS[index].label;
-
-const getAllLabel = (index) => FILTERS[index].allLabel;
-
-const getCollector = (index) => FILTERS[index].collector;
-
-export {getFilters, getNbFilters, getId, getLabel, getAllLabel, getCollector};
+export default FILTERS;

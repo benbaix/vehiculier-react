@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {ALL, SELECT_OPTION} from "../Utils";
-import {getAllLabel, getCollector, getFilters, getId, getLabel} from "../models/FiltersDefinition";
+import {ALL, SELECT_OPTION} from "../Constants";
+import FILTERS from "../models/FiltersDefinition";
 
 const FilterSelect = ({id, label, allLabel, values, selectedValue, updateValue, enabled}) =>
     (
@@ -18,26 +18,26 @@ const FilterSelect = ({id, label, allLabel, values, selectedValue, updateValue, 
     );
 
 const mapStateToProps = (state, ownProps) => {
+    let {vehicules, selectedIndex,selections} = state.vehiculier;
     let index = ownProps.index;
-    let enabled = index <= state.vehiculier.selectedIndex + 1;
+    let filter = FILTERS[index];
+    let enabled = index <= selectedIndex + 1;
     return {
-        id: getId(index),
-        label: getLabel(index),
-        allLabel: getAllLabel(index),
-        values: enabled ? collectOptions(state.vehiculier.vehicules, state.vehiculier.selections, index) : [],
-        selectedValue: enabled ? state.vehiculier.selections[index] : ALL,
-        enabled: enabled
+        id: filter.id,
+        label: filter.label,
+        allLabel: filter.allLabel,
+        values: enabled ? collectOptions(vehicules, selections, index, filter.collector) : [],
+        selectedValue: enabled ? selections[index] : ALL,
+        enabled: enabled,
     };
 };
 
-export const collectOptions = (vehicules, selections, currentIndex) =>
+export const collectOptions = (vehicules, selections, currentIndex, collector) =>
     [...new Set(
         vehicules
-            .filter(vehicule => {
-                return getFilters().reduce((accumulator, filter, index) =>
-                    accumulator && (currentIndex <= index || filter.collector(vehicule) === selections[index]), true);
-            })
-            .map(vehicule => getCollector(currentIndex)(vehicule))
+            .filter(vehicule => FILTERS.reduce((accumulator, filter, index) =>
+                    accumulator && (currentIndex <= index || filter.collector(vehicule) === selections[index]), true))
+            .map(vehicule => collector(vehicule))
     )].sort();
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -46,7 +46,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         updateValue: value => dispatch({
             type: SELECT_OPTION,
             index: index,
-            value: value
+            value: value,
         })
     }
 };
