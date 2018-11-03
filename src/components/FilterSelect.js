@@ -1,21 +1,41 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {ALL, SELECT_OPTION} from "../Constants";
 import FILTERS from "../models/FiltersDefinition";
 
-const FilterSelect = ({id, label, allLabel, values, selectedValue, updateValue, enabled}) =>
-    (
-        <div className="col">
-            <label htmlFor={id}>{label}</label>
-            <select id={id} className="form-control" value={selectedValue} disabled={!enabled}
-                    onChange={event => updateValue(event.target.value)}>
-                <option value={ALL}>{allLabel}</option>
-                {values.map((value, index) =>
-                    <option key={index} value={value}>{value}</option>
-                )}
-            </select>
-        </div>
-    );
+export class FilterSelect extends Component {
+
+    componentDidMount() {
+        this.selectValueIfUnique();
+    }
+
+    componentDidUpdate() {
+        this.selectValueIfUnique();
+    }
+
+    selectValueIfUnique() {
+        let {values, selectedValue, updateValue} = this.props;
+        if (values.length === 1 && values[0] !== selectedValue) {
+            updateValue(values[0]);
+        }
+    }
+
+    render() {
+        let {id, label, allLabel, values, selectedValue, updateValue, enabled} = this.props;
+        return (
+            <div className="col">
+                <label htmlFor={id}>{label}</label>
+                <select id={id} className="form-control" value={selectedValue} disabled={!enabled}
+                        onChange={event => updateValue(event.target.value)}>
+                    <option value={ALL}>{allLabel}</option>
+                    {values.map((value, index) =>
+                        <option key={index} value={value}>{value}</option>
+                    )}
+                </select>
+            </div>
+        );
+    }
+}
 
 const mapStateToProps = (state, ownProps) => {
     let {vehicules, selectedIndex,selections} = state.vehiculier;
