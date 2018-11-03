@@ -1,17 +1,10 @@
 import React, {Component} from 'react';
-import './App.css';
-import './components/VehiculesTable';
-import './mock/vehicules';
 import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
+import './mock/vehicules';
 import vehiculier from "./redux/vehiculier";
-import MarquesContainer from "./containers/MarquesFilter";
-import ModelesContainer from "./containers/ModelesFilter";
-import BoitesContainer from "./containers/BoitesFilter";
-import CarburantsContainer from "./containers/CarburantsFilter";
-import CarrosseriesContainer from "./containers/CarrosseriesFilter";
-import PuissancesContainer from "./containers/PuissancesFilter";
-import VehiculesContainer from "./containers/VehiculesContainer";
+import FilterSelect from "./components/FilterSelect";
+import VehiculesTable from "./components/VehiculesTable";
 
 const store = createStore(
     combineReducers({vehiculier}),
@@ -27,15 +20,15 @@ class App extends Component {
                     <>
                         <div className="form-group">
                             <div className="row">
-                                <MarquesContainer/>
-                                <ModelesContainer/>
-                                <BoitesContainer/>
-                                <CarburantsContainer/>
-                                <CarrosseriesContainer/>
-                                <PuissancesContainer/>
+                                <FilterSelect index={0}/>
+                                <FilterSelect index={1}/>
+                                <FilterSelect index={2}/>
+                                <FilterSelect index={3}/>
+                                <FilterSelect index={4}/>
+                                <FilterSelect index={5}/>
                             </div>
                         </div>
-                        <VehiculesContainer/>
+                        <VehiculesTable/>
                     </>
                 </Provider>
             </div>
