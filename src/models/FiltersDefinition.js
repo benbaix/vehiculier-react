@@ -33,7 +33,7 @@ const FILTERS = [
         id: "puissances",
         label: "Puissance",
         allLabel: "Toutes les puissances",
-        collector: vehicule => String(vehicule.puissance),
+        collector: vehicule => String(vehicule.puissance) + " CV",
     },
     {
         id: "versions",
