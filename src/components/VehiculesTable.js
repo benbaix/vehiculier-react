@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {ALL} from "../Constants";
+import {ALL} from "../constants";
 import FILTERS from "../models/FiltersDefinition";
 
 const VehiculesTable = ({vehicules}) =>

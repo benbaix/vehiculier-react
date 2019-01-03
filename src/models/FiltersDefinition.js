@@ -1,46 +1,74 @@
+import {updateModeles, updateVehicules} from "../redux/actions";
+import {fetchModeles, fetchVehicules} from "../api";
+
+const MARQUE = {
+    id: "marques",
+    label: "Marque",
+    allLabel: "Sélectionnez une marque",
+    options: vehiculier => vehiculier.marques,
+    collector: vehicule => vehicule.marqueLibelle,
+    updateValues: (marque, selections, dispatch) =>
+        fetchModeles(marque, modeles => dispatch(updateModeles(modeles))),
+};
+
+const MODELE = {
+    id: "modeles",
+    label: "Modèle",
+    allLabel: "Sélectionnez un modèle",
+    options: vehiculier => vehiculier.modeles,
+    collector: vehicule => vehicule.modeleLibelle,
+    updateValues: (modele, selections, dispatch) =>
+        fetchVehicules(selections[FILTERS.indexOf(MARQUE)], modele, vehicules => dispatch(updateVehicules(vehicules))),
+};
+
+const BOITE = {
+    id: "boites",
+    label: "Boîte de vitesses",
+    allLabel: "Sélectionnez un type de boite",
+    options: vehiculier => vehiculier.vehicules,
+    collector: vehicule => vehicule.boiteVitesses,
+};
+
+const CARBURANT = {
+    id: "carburants",
+    label: "Carburant",
+    allLabel: "Sélectionnez un type de carburant",
+    options: vehiculier => vehiculier.vehicules,
+    collector: vehicule => vehicule.energieLibelle,
+};
+
+const CARROSSERIE = {
+    id: "carrosseries",
+    label: "Carrosserie",
+    allLabel: "Sélectionnez une carrosserie",
+    options: vehiculier => vehiculier.vehicules,
+    collector: vehicule => vehicule.carrosserieLibelle,
+};
+
+const PUISSANCE = {
+    id: "puissances",
+    label: "Puissance",
+    allLabel: "Sélectionnez une puissance",
+    options: vehiculier => vehiculier.vehicules,
+    collector: vehicule => String(vehicule.puissance) + " CV",
+};
+
+const VERSION = {
+    id: "versions",
+    label: "Version",
+    allLabel: "Sélectionnez une version",
+    options: vehiculier => vehiculier.vehicules,
+    collector: vehicule => vehicule.version,
+};
+
 const FILTERS = [
-    {
-        id: "marques",
-        label: "Marque",
-        allLabel: "Toutes les marques",
-        collector: vehicule => vehicule.marqueLibelle,
-    },
-    {
-        id: "modeles",
-        label: "Modèle",
-        allLabel: "Tous les modèles",
-        collector: vehicule => vehicule.modeleLibelle,
-    },
-    {
-        id: "boites",
-        label: "Boîte de vitesses",
-        allLabel: "Toutes les boites",
-        collector: vehicule => vehicule.boiteVitesses,
-    },
-    {
-        id: "carburants",
-        label: "Carburant",
-        allLabel: "Tous les carburants",
-        collector: vehicule => vehicule.energieLibelle,
-    },
-    {
-        id: "carrosseries",
-        label: "Carrosserie",
-        allLabel: "Toutes les carrosseries",
-        collector: vehicule => vehicule.carrosserieLibelle,
-    },
-    {
-        id: "puissances",
-        label: "Puissance",
-        allLabel: "Toutes les puissances",
-        collector: vehicule => String(vehicule.puissance) + " CV",
-    },
-    {
-        id: "versions",
-        label: "Version",
-        allLabel: "Toutes les versions",
-        collector: vehicule => vehicule.version,
-    },
+    MARQUE,
+    MODELE,
+    BOITE,
+    CARBURANT,
+    CARROSSERIE,
+    PUISSANCE,
+    VERSION,
 ];
 
 export default FILTERS;

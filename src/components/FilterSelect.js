@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {ALL, SELECT_OPTION} from "../Constants";
+import {ALL} from "../constants";
 import FILTERS from "../models/FiltersDefinition";
+import {selectOption} from "../redux/actions";
 
 export class FilterSelect extends Component {
 
@@ -21,12 +22,12 @@ export class FilterSelect extends Component {
     }
 
     render() {
-        let {id, label, allLabel, values, selectedValue, updateValue, enabled} = this.props;
+        let {id, label, allLabel, values, selections, selectedValue, updateValue, enabled} = this.props;
         return (
             <div className="col">
                 <label htmlFor={id}>{label}</label>
                 <select id={id} className="form-control" value={selectedValue} disabled={!enabled}
-                        onChange={event => updateValue(event.target.value)}>
+                        onChange={event => updateValue(event.target.value, selections)}>
                     <option value={ALL}>{allLabel}</option>
                     {values.map((value, index) =>
                         <option key={index} value={value}>{value}</option>
@@ -38,7 +39,7 @@ export class FilterSelect extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    let {vehicules, selectedIndex,selections} = state.vehiculier;
+    let {selectedIndex, selections} = state.vehiculier;
     let index = ownProps.index;
     let filter = FILTERS[index];
     let enabled = index <= selectedIndex + 1;
@@ -46,7 +47,8 @@ const mapStateToProps = (state, ownProps) => {
         id: filter.id,
         label: filter.label,
         allLabel: filter.allLabel,
-        values: enabled ? collectOptions(vehicules, selections, index, filter.collector) : [],
+        values: enabled ? collectOptions(filter.options(state.vehiculier), selections, index, filter.collector) : [],
+        selections: selections,
         selectedValue: enabled ? selections[index] : ALL,
         enabled: enabled,
     };
@@ -56,18 +58,20 @@ export const collectOptions = (vehicules, selections, currentIndex, collector) =
     [...new Set(
         vehicules
             .filter(vehicule => FILTERS.reduce((accumulator, filter, index) =>
-                    accumulator && (currentIndex <= index || filter.collector(vehicule) === selections[index]), true))
+                accumulator && (currentIndex <= index || filter.collector(vehicule) === selections[index]), true))
             .map(vehicule => collector(vehicule))
     )].sort();
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     let index = ownProps.index;
+    let updateValues = FILTERS[index].updateValues;
     return {
-        updateValue: value => dispatch({
-            type: SELECT_OPTION,
-            index: index,
-            value: value,
-        })
+        updateValue: (value, selections) => {
+            dispatch(selectOption(index, value));
+            if (updateValues) {
+                updateValues(value, selections, dispatch);
+            }
+        }
     }
 };
 

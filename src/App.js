@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
-import './mock/vehicules';
 import vehiculier from "./redux/vehiculier";
 import FilterSelect from "./components/FilterSelect";
 import VehiculesTable from "./components/VehiculesTable";
@@ -31,5 +30,5 @@ class App extends Component {
         );
     }
 }
-
+ 
 export default App;

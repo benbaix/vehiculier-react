@@ -1,21 +1,36 @@
-import VEHICULES from "../mock/vehicules";
-import {ALL, SELECT_OPTION} from "../Constants";
+import {ALL} from "../constants";
 import FILTERS from "../models/FiltersDefinition";
+import {MARQUES} from "../models/Marques";
+import {SELECT_OPTION, UPDATE_MODELES, UPDATE_VEHICULES} from "./actions";
 
 const initialState = {
-    vehicules: VEHICULES,
+    marques: MARQUES,
+    modeles: [],
+    vehicules: [],
     selectedIndex: -1,
     selections: Array(FILTERS.length).fill(ALL),
 };
 
 const vehiculier = (state = initialState, action) => {
     switch (action.type) {
-        case SELECT_OPTION:
-            state.selections[action.index] = action.value;
-            state.selections.fill(ALL, action.index + 1, FILTERS.length);
+        case UPDATE_MODELES:
             return {
                 ...state,
-                selectedIndex: action.value === ALL ? action.index - 1 : action.index,
+                modeles: action.values,
+                vehicules: [],
+            };
+        case UPDATE_VEHICULES:
+            return {
+                ...state,
+                vehicules: action.values,
+            };
+        case SELECT_OPTION:
+            let {index, value} = action;
+            state.selections[index] = value;
+            state.selections.fill(ALL, index + 1, FILTERS.length);
+            return {
+                ...state,
+                selectedIndex: value === ALL ? index - 1 : index,
             };
         default:
             return state;
